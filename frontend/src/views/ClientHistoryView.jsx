@@ -15,13 +15,13 @@ export default function ClientHistoryView() {
       const userData = JSON.parse(localStorage.getItem('user_data'));
 
       if (!userData || !userData.id) {
-        const response = await fetch('http://localhost:3001/api/orders');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
         if (response.ok) {
           const data = await response.json();
           setOrders(data.slice(0, 10));
         }
       } else {
-        const response = await fetch(`http://localhost:3001/api/users/${userData.id}/orders`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${userData.id}/orders`);
         if (response.ok) {
           const data = await response.json();
           setOrders(data);
@@ -29,7 +29,7 @@ export default function ClientHistoryView() {
       }
     } catch (err) {
       console.error('Error fetching orders:', err);
-      const response = await fetch('http://localhost:3001/api/orders');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       if (response.ok) {
         const data = await response.json();
         setOrders(data.slice(0, 10));
@@ -301,7 +301,7 @@ function OrderCard({ order }) {
         {/* Foto de entrega si existe */}
         {order.proofImage && (
           <a
-            href={`http://localhost:3001${order.proofImage}`}
+            href={`${import.meta.env.VITE_API_URL}${order.proofImage}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -332,7 +332,7 @@ function OrderCard({ order }) {
         {/* Botón Descargar Comprobante - Solo si está ENTREGADO */}
         {isDelivered && (
           <a
-            href={`http://localhost:3001/api/orders/${order.id}/invoice?type=boleta`}
+            href={`${import.meta.env.VITE_API_URL}/api/orders/${order.id}/invoice?type=boleta`}
             target="_blank"
             rel="noopener noreferrer"
             style={{

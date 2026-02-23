@@ -16,7 +16,7 @@ export default function ETADisplay({ orderId, status, isExpress }) {
 
     const fetchETA = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/orders/${orderId}/eta`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/eta`);
         if (res.ok) {
           const data = await res.json();
           setEta(data);

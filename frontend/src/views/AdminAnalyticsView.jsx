@@ -23,7 +23,7 @@ export default function AdminAnalyticsView() {
 
   const fetchMetrics = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/orders');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       if (response.ok) {
         const data = await response.json();
 
@@ -52,7 +52,7 @@ export default function AdminAnalyticsView() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/orders');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       if (response.ok) {
         const data = await response.json();
         setOrders(data);

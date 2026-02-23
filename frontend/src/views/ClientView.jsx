@@ -37,7 +37,7 @@ export default function ClientView({
         userId: userData?.id || null
       };
 
-      const response = await fetch('http://localhost:3001/api/orders', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData)
@@ -49,7 +49,7 @@ export default function ClientView({
         // Calcular ETA con IA
         if (osrmDuration && distance) {
           try {
-            await fetch(`http://localhost:3001/api/orders/${newOrder.id}/calculate-eta`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${newOrder.id}/calculate-eta`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -187,7 +187,7 @@ export default function ClientView({
           }}
           onClick={async () => {
             try {
-              const response = await fetch(`http://localhost:3001/api/orders/${lastCreatedOrder.id}/whatsapp?type=created`);
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${lastCreatedOrder.id}/whatsapp?type=created`);
               if (response.ok) {
                 const data = await response.json();
                 window.open(data.url, '_blank');

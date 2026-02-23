@@ -81,7 +81,7 @@ export default function TrackingView({ trackId, setTrackId, handleTrackOrder, tr
             )}
 
             {trackedOrder.proofImage && (
-              <a href={`http://localhost:3001${trackedOrder.proofImage}`} target="_blank" rel="noopener noreferrer"
+              <a href={`${import.meta.env.VITE_API_URL}${trackedOrder.proofImage}`} target="_blank" rel="noopener noreferrer"
                  style={{display:'block', marginTop:'15px', color:'#D71920', fontWeight:'bold', textAlign: 'center', textDecoration: 'none', border: '1px solid #D71920', padding: '10px', borderRadius: '8px'}}>
                  📄 VER FOTO DE ENTREGA
               </a>

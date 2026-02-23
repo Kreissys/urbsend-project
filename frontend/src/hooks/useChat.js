@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:3001/chat';
+const SOCKET_URL = `${import.meta.env.VITE_API_URL}/chat`;
 
 export function useChat(orderId, userType) {
   const [socket, setSocket] = useState(null);

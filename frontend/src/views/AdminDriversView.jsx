@@ -12,7 +12,7 @@ export default function AdminDriversView() {
 
   const fetchPendingDrivers = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/admin/drivers/pending');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/drivers/pending`);
       if (response.ok) {
         const data = await response.json();
         setPendingDrivers(data);
@@ -32,7 +32,7 @@ export default function AdminDriversView() {
     if (!confirm(confirmMsg)) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/admin/drivers/${driverId}/verify`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/drivers/${driverId}/verify`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isVerified })
@@ -249,21 +249,21 @@ function DriverDetailsModal({ driver, onClose, onApprove, onReject }) {
           {driver.driverLicense && (
             <DocumentLink 
               label="Licencia de Conducir"
-              url={`http://localhost:3001${driver.driverLicense}`}
+              url={`${import.meta.env.VITE_API_URL}${driver.driverLicense}`}
             />
           )}
           
           {driver.vehicleSOAT && (
             <DocumentLink 
               label="SOAT del Vehículo"
-              url={`http://localhost:3001${driver.vehicleSOAT}`}
+              url={`${import.meta.env.VITE_API_URL}${driver.vehicleSOAT}`}
             />
           )}
           
           {driver.criminalRecord && (
             <DocumentLink 
               label="Antecedentes Penales"
-              url={`http://localhost:3001${driver.criminalRecord}`}
+              url={`${import.meta.env.VITE_API_URL}${driver.criminalRecord}`}
             />
           )}
         </div>

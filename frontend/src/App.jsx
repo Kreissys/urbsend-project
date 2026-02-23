@@ -112,9 +112,9 @@ function AppContent() {
   // --- API ---
   const fetchData = async () => {
     try {
-      const resOrders = await fetch('http://localhost:3001/api/orders');
+      const resOrders = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       if (resOrders.ok) setRecentOrders(await resOrders.json());
-      const resDrivers = await fetch('http://localhost:3001/api/drivers');
+      const resDrivers = await fetch(`${import.meta.env.VITE_API_URL}/api/drivers`);
       if (resDrivers.ok) setDrivers(await resDrivers.json());
     } catch (e) { console.error("Error data"); }
   };
@@ -319,7 +319,7 @@ function AppContent() {
   
   const updateStatus = async (id, status, driverId=null) => {
     const payload = { status }; if(driverId) payload.driverId = driverId;
-    await fetch(`http://localhost:3001/api/orders/${id}/status`, { method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${id}/status`, { method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
     fetchData();
   };
   
@@ -341,13 +341,13 @@ function AppContent() {
   const handleFileUpload = async (e) => {
     const file = e.target.files[0]; if (!file || !orderToUpload) return;
     const formData = new FormData(); formData.append('evidence', file); formData.append('status', 'ENTREGADO');
-    await fetch(`http://localhost:3001/api/orders/${orderToUpload}/status`, { method: 'PATCH', body: formData });
+    await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderToUpload}/status`, { method: 'PATCH', body: formData });
     toast.success("Pedido entregado con éxito"); fetchData();
   };
   
   const handleTrackOrder = async () => { 
     if (!trackId) return;
-    const res = await fetch(`http://localhost:3001/api/orders/${trackId}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${trackId}`);
     if (res.ok) { const order = await res.json(); setTrackedOrder(order); visualizeOrderOnMap(order); }
   };
   

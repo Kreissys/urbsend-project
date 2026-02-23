@@ -27,7 +27,7 @@ export default function DriverEarningsView() {
         return;
       }
 
-      const driversRes = await fetch('http://localhost:3001/api/drivers');
+      const driversRes = await fetch(`${import.meta.env.VITE_API_URL}/api/drivers`);
       if (!driversRes.ok) {
         setLoading(false);
         return;
@@ -41,7 +41,7 @@ export default function DriverEarningsView() {
         return;
       }
 
-      const ordersRes = await fetch('http://localhost:3001/api/orders');
+      const ordersRes = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
       if (!ordersRes.ok) {
         setLoading(false);
         return;

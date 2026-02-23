@@ -380,7 +380,7 @@ function OrderCard({ order, myDriverId, handleDriverStartRoute, visualizeOrderOn
         {/* CASO 4: Pedido ENTREGADO */}
         {isDelivered && order.proofImage && (
           <a
-            href={`http://localhost:3001${order.proofImage}`}
+            href={`${import.meta.env.VITE_API_URL}${order.proofImage}`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -431,7 +431,7 @@ function ActionButton({ onClick, bgColor, icon, label }) {
 function WhatsAppButton({ orderId, type }) {
   const handleWhatsApp = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/orders/${orderId}/whatsapp?type=${type}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/whatsapp?type=${type}`);
       if (response.ok) {
         const data = await response.json();
         window.open(data.url, '_blank');

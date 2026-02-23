@@ -60,7 +60,7 @@ export default function RegisterView() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/register/client', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register/client`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -113,7 +113,7 @@ export default function RegisterView() {
     if (driverData.criminalRecord) formData.append('criminalRecord', driverData.criminalRecord);
 
     try {
-      const response = await fetch('http://localhost:3001/api/register/driver', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register/driver`, {
         method: 'POST',
         body: formData
       });
